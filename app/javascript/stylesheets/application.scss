@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap');
+}
+
+* {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+h1 {
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+body {
+    background-color: lightyellow;
+}
+
+.opacity-img {
+    opacity: 0.1;
+}

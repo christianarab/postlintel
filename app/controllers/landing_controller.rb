@@ -1,5 +1,3 @@
 class LandingController < ApplicationController
-  def index
-    @users = Users.all
-  end
+  before_action :authenticate_user!
 end
