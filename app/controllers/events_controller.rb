@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @organization = Organization.find(params[:organization_id])
-    @events = @organization.events
+    @events = Organization.find(params[:organization_id]).events
   end
 
   def create
@@ -9,9 +8,9 @@ class EventsController < ApplicationController
     @event = @organization.events.create(events_params)
   end
 
-  # def show
-  #   @organization = Organization.find(params[:id])
-  # end
+  def show
+    @event = Organization.find(params[:organization_id]).events.find(params[:id])
+  end
 
   # def create
   #   @organization = Organization.create(org_params)

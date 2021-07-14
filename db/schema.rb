@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_14_140120) do
+ActiveRecord::Schema.define(version: 2021_07_14_172238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "attendances", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "event_id", null: false
-    t.boolean "attending?"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["event_id"], name: "index_attendances_on_event_id"
-    t.index ["user_id"], name: "index_attendances_on_user_id"
-  end
 
   create_table "comments", force: :cascade do |t|
     t.string "commentable_type"
@@ -48,6 +38,13 @@ ActiveRecord::Schema.define(version: 2021_07_14_140120) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -56,6 +53,12 @@ ActiveRecord::Schema.define(version: 2021_07_14_140120) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_organizations_on_user_id"
+  end
+
+  create_table "signups", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,8 +74,6 @@ ActiveRecord::Schema.define(version: 2021_07_14_140120) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "attendances", "events"
-  add_foreign_key "attendances", "users"
   add_foreign_key "events", "organizations"
   add_foreign_key "events", "users"
   add_foreign_key "organizations", "users"

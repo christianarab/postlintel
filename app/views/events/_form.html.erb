@@ -1,22 +1,22 @@
 <%= form_with(model: @event, url: organization_events_path(params[:id])) do |f| %>
     <%= f.label :title, class: "label" %>
     <%= f.text_field :title, class: "input", autofocus: true %>
-
+    <br>  
     <%= f.label :description, class: "label" %>
     <%= f.text_field :description, class: "input", autofocus: true %>
-
+    <br>  
     <%= f.label :location, class: "label" %>
     <%= f.text_field :location, class: "input", autofocus: true %>
-
+    <br>  
     <%= f.label :start_date_time, class: "label" %>
     <%= f.date_select :start_date_time, type: "date", class: "input" %>
-
+    <br>  
     <%= f.label :end_date_time, class: "label" %>
     <%= f.date_select :end_date_time, type: "date", class: "input" %>
-    
+    <br>  
     <%= f.hidden_field :user_id, :value => current_user.id %>
-
+    <br>  
     <%= f.submit "Create Event" %>
-
+    <br>  
     <%= link_to 'Cancel', root_path %>
 <% end %>

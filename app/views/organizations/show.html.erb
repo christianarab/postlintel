@@ -27,5 +27,12 @@
     <%= render 'events/form', event: @event %>
   </div>
 </div>
-  </div>
-</div>
+
+<%= form_with(model: @follow, url: organization_follows_path(params[:id])) do |f| %>
+    <%= f.hidden_field :id, :value => current_user.id %>
+    <%= f.hidden_field :email, :value => current_user.email %>
+    <%= f.hidden_field :first_name, :value => "First Name" %>
+    <br>  
+    <%= f.submit "Follow" %>
+    <br>  
+<% end %>

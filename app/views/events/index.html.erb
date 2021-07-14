@@ -1,0 +1,18 @@
+
+<div class="col">
+  <br>
+  <h3>
+  Events for <%= Organization.find(params[:organization_id]).title %> Group<br>
+  </h3>
+  <br>
+  <% @events.each do | event | %>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= event.title %></h5>
+        <p class="card-text"><%= event.location %></p>
+        <p class="card-text"><%= event.description %></p>
+        <%= link_to "link", organization_event_path(event.organization_id, event.id) %>
+      </div>
+    </div>
+    <% end %>
+</div>
