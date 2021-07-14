@@ -16,6 +16,20 @@
       </ul>
       <ul class="navbar-nav ms-auto">
         <% if current_user %>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <p><%= link_to @organizations, organizations_path %></p>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            </ul>
+          </a>
+          </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <p>Events</p>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            </ul>
+          </a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="fa fa-user"></div>

@@ -1,16 +1,26 @@
-<h1>All Organizations</h1>
-
-<ul>
-  <% @organizations.each do | organization | %>
-    <li><%= organization.title %> <%= link_to "show", project_path(project) %></li>
-  <% end %>
-</ul>
-
-<%= form_with model: @organization do |form| %>
-  <%= form.text_field :title %>
-  <%= form.text_field :description %>
-  <%= form.text_field :location %>
-  <%= form.text_field :user_id %>
-  <%= form.text_field :id %>
-  <%= form.submit %>
-<% end %>
+<div class="row">
+  <div class="col">
+<h1>Current Organizations on PL</h1>
+    <% @organizations.each do | organization | %>
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%= organization.title%></h5>
+          <p class="card-text"><%= organization.description %></p>
+          <a href="#" class="btn btn-primary"><%= link_to organization.title, organization %></a>
+        </div>
+      </div>
+    <% end %>
+  <div class="col">
+  <h1>Create a new Organization</h1>
+    <%= form_with model: @organization do |form| %>
+      <p>Title:</p><%= form.text_field :title %>
+      <p>Description:</p><%= form.text_field :description %>
+      <p>Location:</p><%= form.text_field :location %>
+      <%= form.hidden_field :user_id, :value => current_user.id %>
+      <%= form.submit %>
+    <% end %>
+  </div>
+</div>
+  </div>
+</div

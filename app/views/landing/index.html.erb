@@ -3,41 +3,42 @@
     <img class="opacity-img" src="https://www.science-sparks.com/wp-content/uploads/2021/04/Column-and-Lintel-1024x395.jpeg" />
   </div>
   <div class="col-sm-4">
-  <h2>PostLintel</h2>
-  <p>A place for Community</p>
-  <ol>
-    <li><p>Create login</p></li>
-    <li><p>Organize Models</p></li>
-    <li><p>Add more features</p></li>
-  </ol>
-<% if user_signed_in? %>
-  <p> You are logged in.<p>
-  <% else %><h2>Log in</h2>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
+    <h2>PostLintel</h2>
+    <p>A place for Community</p>
+    <ol>
+      <li><p>Create login</p></li>
+      <li><p>Organize Models</p></li>
+      <li><p>Add more features</p></li>
+    </ol>
+    <% if user_signed_in? %>
+      <p> You are logged in.<p>
+      <% else %><h2>Log in</h2>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
 
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password" %>
-      </div>
+          <div class="field">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "current-password" %>
+          </div>
 
-      <% if devise_mapping.rememberable? %>
-        <div class="field">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+
+          <div class="actions">
+            <%= f.submit "Log in" %>
+          </div>
+        <% end %>
+        <%= render "devise/shared/links" %>
+          </div>
       <% end %>
-
-      <div class="actions">
-        <%= f.submit "Log in" %>
-      </div>
-    <% end %>
-    <%= render "devise/shared/links" %>
-      </div>
 </div>
-<% end %>
+
 
 
