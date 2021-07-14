@@ -1,23 +1,37 @@
 <div class="row">
   <div class="col">
-<h1>Current Organizations on PL</h1>
-    <% @organizations.each do | organization | %>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><%= organization.title%></h5>
-          <p class="card-text"><%= organization.description %></p>
-          <a href="#" class="btn btn-primary"><%= link_to organization.title, organization %></a>
+    <br>
+    <h3>
+      Organizations on PL
+      <br>
+    </h3>
+    <br>
+      <% @organizations.each do | organization | %>
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="..." alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><%= organization.title%></h5>
+            <p class="card-text"><%= organization.description %></p>
+            <a href="#" class="btn btn-primary"><%= link_to organization.title, organization %></a>
+          </div>
         </div>
-      </div>
-    <% end %>
+        <br>
+      <% end %>
+  </div>
   <div class="col">
-  <h1>Create a new Organization</h1>
+    <br>
+    <h3>
+    Create a New Organization
+    <br>
+    <small class="text-muted">Grow your community today.</small>
+    </h3>
+    <br>
     <%= form_with model: @organization do |form| %>
       <p>Title:</p><%= form.text_field :title %>
       <p>Description:</p><%= form.text_field :description %>
       <p>Location:</p><%= form.text_field :location %>
       <%= form.hidden_field :user_id, :value => current_user.id %>
+      <br><br>
       <%= form.submit %>
     <% end %>
   </div>
