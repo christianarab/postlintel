@@ -11,8 +11,17 @@
     <div class="container">
         <ul class="list-group">
             <li class="list-group-item"><small class="text-muted">Location </small><%= @organization.location %></li>
-            <li class="list-group-item"><small class="text-muted">Lead by </small><%= @organization.user_id %></li>
+            <li class="list-group-item"><small class="text-muted">Lead by </small><%= User.find(@organization.user_id).email %></li>
             <li class="list-group-item"><small class="text-muted">Orgnization ID# </small><%= @organization.id %></li>
+            <li class="list-group-item"><small class="text-muted">Events: </small><%= link_to "Show events", organization_events_path(params[:id]) %></li>
+            <li class="list-group-item"><small class="text-muted"></small><%=  button_to "Edit", edit_organization_path(params[:id]), class: "btn btn-secondary"  %>
+            <br><%= form_with(model: @follow, url: organization_follows_path(params[:id])) do |f| %>
+              <%= f.hidden_field :id, :value => current_user.id %>
+              <%= f.hidden_field :email, :value => current_user.email %>
+              <%= f.hidden_field :first_name, :value => "First Name" %>
+              <%= f.submit "Follow", class: "btn btn-primary" %>
+          <% end %>
+          </li>
         </ul>
     </div>
   </div>
@@ -27,12 +36,14 @@
     <%= render 'events/form', event: @event %>
   </div>
 </div>
-
-<%= form_with(model: @follow, url: organization_follows_path(params[:id])) do |f| %>
-    <%= f.hidden_field :id, :value => current_user.id %>
-    <%= f.hidden_field :email, :value => current_user.email %>
-    <%= f.hidden_field :first_name, :value => "First Name" %>
-    <br>  
-    <%= f.submit "Follow" %>
-    <br>  
-<% end %>
+  <div class="col">
+    <br>
+    <h3>
+    <%= @organization.title %>
+    <br>
+    <small class="text-muted">Followers</small>
+    </h3>
+    <br>
+    <%= @organization.followers.inspect %>
+  </div>
+</div>

@@ -12,9 +12,15 @@ class OrganizationsController < ApplicationController
     redirect_to @organization
   end
 
+  def update
+    @organization = Organization.find(params[:id])
+    @organization.update(org_params)
+    redirect_to @organization
+  end
+
   private
 
   def org_params
-    params.permit(:title, :description, :location, :user_id)
+    params.permit(:title, :description, :location, :user_id, :id)
   end
 end

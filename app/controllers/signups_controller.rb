@@ -9,17 +9,11 @@ class SignupsController < ApplicationController
     end
   end
 
-  # def show
-  #   @organization = Organization.find(params[:id])
-  # end
-
-  # def create
-  #   @organization = Organization.create(org_params)
-  #   redirect_to @organization
-  # end
   private
 
   def signup_params
     params.permit(:user_id)
   end
+
+ 
 end

@@ -8,11 +8,12 @@
     <br>
       <% @organizations.each do | organization | %>
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="..." alt="Card image cap">
+          <img class="card-img-top" src="https://www.sweetwater.com/insync/media/2020/03/Nashville-Cellphone-Choir-Featured-Image.jpg" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title"><%= organization.title%></h5>
+            <h5 class="card-title"><%= organization.title %></h5>
             <p class="card-text"><%= organization.description %></p>
-            <a href="#" class="btn btn-primary"><%= link_to organization.title, organization %></a>
+            <p class="card-text">This community is lead by: <%= User.find(organization.user_id).email %></p>
+            <a><%= link_to organization.title, organization, class: "btn btn-primary" %></a>
           </div>
         </div>
         <br>

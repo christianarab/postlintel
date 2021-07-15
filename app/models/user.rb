@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :organizations
   has_many :signups
+  has_many :follows
   has_many :events
   has_many :comments, as: :commentable
 end

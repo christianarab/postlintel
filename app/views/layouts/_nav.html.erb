@@ -1,9 +1,16 @@
 <nav class="navbar navbar-dark bg-dark">
+
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       <i class="fas fa-flag"></i>
       PL
     </a>
+          <div>
+        <% if user_signed_in? %>
+      <p class="text-white"> <%= current_user.email %> is logged in.<p>
+        <% end %>
+    </div>
+    <br>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,22 +21,13 @@
           Home
         <% end %>
       </ul>
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav">
         <% if current_user %>
-         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <p><%= link_to @organizations, organizations_path %></p>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            </ul>
-          </a>
-          </li>
-          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <p>Events</p>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            </ul>
-          </a>
-          </li>
+        <li class="nav-item">
+            <p><%= link_to "Organizations", organizations_path, class: "nav-link" %></p>
+        </li>
+        <li class="nav-item">
+        <p><%= link_to "Events", events_path, class: "nav-link" %></p>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="fa fa-user"></div>
@@ -53,4 +51,5 @@
       </ul>
     </div>
   </div>
+
 </nav>

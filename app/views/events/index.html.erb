@@ -1,8 +1,7 @@
-
 <div class="col">
   <br>
   <h3>
-  Events for <%= Organization.find(params[:organization_id]).title %> Group<br>
+  All Events <br>
   </h3>
   <br>
   <% @events.each do | event | %>
@@ -11,7 +10,8 @@
         <h5 class="card-title"><%= event.title %></h5>
         <p class="card-text"><%= event.location %></p>
         <p class="card-text"><%= event.description %></p>
-        <%= link_to "link", organization_event_path(event.organization_id, event.id) %>
+        <%= link_to "link to details", organization_event_path(event.organization_id, event.id) %>
+        <%= button_to "delete", organization_event_path(event.organization_id, event.id), method: :delete %>
       </div>
     </div>
     <% end %>

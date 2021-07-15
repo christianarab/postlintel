@@ -1,0 +1,8 @@
+ <%= form_with model: @organization do |form| %>
+      <br>  <p>Title:</p><%= form.text_field :title %>
+      <br>  <p>Description:</p><%= form.text_field :description %>
+      <br>  <p>Location:</p><%= form.text_field :location %>
+      <br>  <%= form.hidden_field :user_id, :value => current_user.id %>
+      <br><br>
+      <%= form.submit %>
+<% end %>

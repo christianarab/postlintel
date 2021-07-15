@@ -1,24 +1,57 @@
-
-<div class="col">
+<div class="row">
+  <div class="col">
+    <h1>Details:</h1>
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title"><%= @event.title %></h5>
         <p class="card-text"><%= @event.location %></p>
         <p class="card-text"><%= @event.description %></p>
         <%= link_to "link", organization_event_path(@event.organization_id, @event.id) %>
-        <h1>SIGN UP for event</h1>
-            <% if current_user.signups %>
-            <%# /organizations/:organization_id/events/:event_id/signups(.:format)%>
-            <%# = button_to "Click to Attend", organization_event_signups_path(@event.organization_id, @event.id), method: :post %>
-            <% end %>
-    <%= form_with(model: @signup, url: organization_event_signups_path(@event.organization_id, @event.id)) do |f| %>
-    <%= f.hidden_field :user_id, :value => current_user.id %>
-    <br>  
-    <%= f.submit "Click to Attend" %>
-    <br>  
-<% end %>
+        <%= form_with(model: @signup, url: organization_event_signups_path(@event.organization, @event)) do |f| %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <br>  
+          <%= f.submit "Click to Attend" %>
+        <% end %>
+        <br>  
       </div>
     </div>
+  </div>
+
+  <div class="col">
+    <h1>Attendees:</h1>
+    <% @event.signups.each do | signup | %>
+      <div class="card w-10 p-1" style="width: 13rem;">
+        <div class="card-body">
+          <img src="https://www.fairtravel4u.org/wp-content/uploads/2018/06/sample-profile-pic.png" class="rounded-circle img-thumbnail">
+            <h6 class="card-title"> <%= User.find(signup.user_id).email %></h6>
+        </div>
+          </div>
+        <br>
+        <% end %>
+  </div>
+
+
+  <h1>Comments</h1>
+    <% @event.comments.each do | comment | %>
+    <div class="card">
+      <h5 class="card-header">Author: <%= User.find(comment.user_id).email %></h5>
+      <div class="card-body">
+        <h5 class="card-title"><%= comment.created_at %></h5>
+        <h6 class="card-title">Comment ID: <%= comment.id %></h6>
+        <p class="card-text"><%= comment.body %></p>
+        <%= form_with(model: @event, url: organization_event_comment_path(@event.organization, comment), method: 'delete' ) do |f| %>
+        <%= f.submit "Destroy" %>
+    <% end %>
+      </div>
+    </div>
+    <br>
+  <% end %>
 </div>
 
 
+<%= form_with(model: @comment, url: organization_event_comments_path(@event.organization, @event), method: 'post' ) do |f| %>
+  <%= f.text_area :body %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <br>
+  <%= f.submit %>
+<% end %>

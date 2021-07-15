@@ -9,14 +9,14 @@
     <%= f.text_field :location, class: "input", autofocus: true %>
     <br>  
     <%= f.label :start_date_time, class: "label" %>
-    <%= f.date_select :start_date_time, type: "date", class: "input" %>
+    <%= f.datetime_select :start_date_time, type: "date", class: "input" %>
     <br>  
     <%= f.label :end_date_time, class: "label" %>
-    <%= f.date_select :end_date_time, type: "date", class: "input" %>
+    <%= f.datetime_select :end_date_time, type: "date", class: "input" %>
     <br>  
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <br>  
-    <%= f.submit "Create Event" %>
+    <%= f.submit "Create Event", class: "btn btn-primary" %>
     <br>  
     <%= link_to 'Cancel', root_path %>
 <% end %>

@@ -3,10 +3,13 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :events
+
   resources :organizations do
-    resource :follows
+    post 'organization' => 'organization#edit'
+    resources :follows
     resources :events do
-      resources :signups, only: [:create]
+      resources :signups, only: [:create, :destroy]
       resources :comments
     end
   end

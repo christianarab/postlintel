@@ -1,6 +1,10 @@
 class EventsController < ApplicationController
   def index
-    @events = Organization.find(params[:organization_id]).events
+    if params[:organization_id]
+      @events = Organization.find(params[:organization_id]).events
+    else
+      @events = Event.all
+    end
   end
 
   def create
@@ -12,10 +16,13 @@ class EventsController < ApplicationController
     @event = Organization.find(params[:organization_id]).events.find(params[:id])
   end
 
-  # def create
-  #   @organization = Organization.create(org_params)
-  #   redirect_to @organization
-  # end
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    flash[:success] = 'event deleted'
+    redirect_back(fallback_location: root_path)
+  end
+
 
   private
 
