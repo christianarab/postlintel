@@ -7,6 +7,7 @@
         <p class="card-text"><%= @event.location %></p>
         <p class="card-text"><%= @event.description %></p>
         <%= link_to "link", organization_event_path(@event.organization_id, @event.id) %>
+        <%= link_to "delete", organization_event_path(@event.organization_id, @event), :method => 'delete' %>
         <%= form_with(model: @signup, url: organization_event_signups_path(@event.organization, @event)) do |f| %>
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <br>  

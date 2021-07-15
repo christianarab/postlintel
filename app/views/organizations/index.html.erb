@@ -1,24 +1,31 @@
 <div class="row">
-  <div class="col">
-    <br>
-    <h3>
-      Organizations on PL
+  <br>
+      <br>  <br>
+      <h3>
       <br>
-    </h3>
-    <br>
-      <% @organizations.each do | organization | %>
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="https://www.sweetwater.com/insync/media/2020/03/Nashville-Cellphone-Choir-Featured-Image.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title"><%= organization.title %></h5>
-            <p class="card-text"><%= organization.description %></p>
-            <p class="card-text">This community is lead by: <%= User.find(organization.user_id).email %></p>
-            <a><%= link_to organization.title, organization, class: "btn btn-primary" %></a>
-          </div>
-        </div>
+        Organizations on PL
         <br>
-      <% end %>
-  </div>
+      </h3>
+      <br>
+        <% @organizations.each do | organization | %>
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://www.sweetwater.com/insync/media/2020/03/Nashville-Cellphone-Choir-Featured-Image.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><%= organization.title %></h5>
+              <p class="card-text"><%= organization.description %></p>
+              <p class="card-text">This community is lead by: <%= User.find(organization.user_id).email %></p>
+              <a><%= link_to organization.title, organization, class: "btn btn-primary" %></a>
+              <% if organization.user_id = current_user.id %>
+              <%= link_to "Edit", organization, class: "btns btn-outline-danger" %>
+              <% end %>
+            </div>
+          </div>
+          <br><br>
+        <% end %>
+        <br>
+    <% if @page > 1 %><%= link_to "<- Previous 4", organizations_path(page: @page - 1), class: "btn btn-secondary" %> <% end %>
+    <%= link_to "Next 4 ->", organizations_path(page: @page + 1), class: "btn btn-primary"%>
+</div>
   <div class="col">
     <br>
     <h3>

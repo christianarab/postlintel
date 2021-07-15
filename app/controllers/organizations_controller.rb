@@ -1,6 +1,9 @@
 class OrganizationsController < ApplicationController
+  ORGANIZATIONS_PER_PAGE = 4
+  
   def index
-    @organizations = Organization.all
+    @page = params.fetch(:page, 0).to_i
+    @organizations = Organization.offset(@page * ORGANIZATIONS_PER_PAGE).limit(ORGANIZATIONS_PER_PAGE)
   end
 
   def show

@@ -14,7 +14,6 @@
             <li class="list-group-item"><small class="text-muted">Lead by </small><%= User.find(@organization.user_id).email %></li>
             <li class="list-group-item"><small class="text-muted">Orgnization ID# </small><%= @organization.id %></li>
             <li class="list-group-item"><small class="text-muted">Events: </small><%= link_to "Show events", organization_events_path(params[:id]) %></li>
-            <li class="list-group-item"><small class="text-muted"></small><%=  button_to "Edit", edit_organization_path(params[:id]), class: "btn btn-secondary"  %>
             <br><%= form_with(model: @follow, url: organization_follows_path(params[:id])) do |f| %>
               <%= f.hidden_field :user_id, :value => current_user.id %>
               <%= f.submit "Follow", class: "btn btn-primary" %>
@@ -43,9 +42,9 @@
   <div class="col">
     <br>
     <h3>
-    <%= @organization.title %>
+    <%= @organization.title %> Organization
     <br>
-    <small class="text-muted">Followers</small>
+    <small class="text-muted">Has <%= @organization.follows.count %> followers</small>
     </h3>
     <br>
   <% @organization.follows.each do |follow| %>
