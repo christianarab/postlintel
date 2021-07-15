@@ -28,12 +28,12 @@
     </h3>
     <br>
     <%= form_with model: @organization do |form| %>
-      <br>  <p>Title:</p><%= form.text_field :title %>
-      <br>  <p>Description:</p><%= form.text_field :description %>
-      <br>  <p>Location:</p><%= form.text_field :location %>
+      <br>  <h5>Title:</h5><%= form.text_field :title %>
+      <br>  <h5>Description:</h5><%= form.text_field :description %>
+      <br>  <h5>Location:</h5><%= form.text_field :location %>
       <br>  <%= form.hidden_field :user_id, :value => current_user.id %>
-      <br><br>
-      <%= form.submit %>
+      <br>
+      <%= form.submit "Submit a New Organization", :class => 'btn-primary btn' %>
     <% end %>
   </div>
 </div

@@ -1,11 +1,21 @@
 class SignupsController < ApplicationController
+  # Add a constraint: one user_id towards one event_id
   def create
     @event = Event.find(params[:event_id])
-    @signup = @event.signups.create(signup_params)
-    if @signup
-      puts "Sign up successful"
+    if @event.signed_up? current_user
+      puts "Current user already signed up"
     else
-      puts "Sign up did not work"
+      @signup = @event.signups.create(signup_params)
+      puts "Current user is now signed up"
+    end
+  end
+
+  def status
+    @event = Event.find(params[:event_id])
+    if @event.signups.includes(signup_params)
+      puts "This person is signed up already"
+    else
+      puts "not signed up yet"
     end
   end
 
@@ -15,5 +25,12 @@ class SignupsController < ApplicationController
     params.permit(:user_id)
   end
 
- 
+  def status
+    @event = Event.find(params[:event_id])
+    if @event.signups.includes(signup_params)
+      puts "This person is signed up already"
+    else
+      puts "not signed up yet"
+    end
+  end
 end

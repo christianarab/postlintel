@@ -8,9 +8,10 @@
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title"><%= event.title %></h5>
-        <p class="card-text"><%= event.location %></p>
-        <p class="card-text"><%= event.description %></p>
-        <%= link_to "link to details", organization_event_path(event.organization_id, event.id) %>
+        <p class="card-text">Organization: <%= event.organization.title %></p>
+        <p class="card-text">Location: <%= event.location %></p>
+        <p class="card-text">Description: <%= event.description %></p>
+        <%= link_to "link to details", organization_event_path(event.organization_id, event.id), class: "btn btn-primary" %>
         <%= button_to "delete", organization_event_path(event.organization_id, event.id), method: :delete %>
       </div>
     </div>
