@@ -12,8 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |resource|
-      puts " I MADE IT HERE"
-      Profile.create(tagline: "Enter your tagline", interests: "Enter your interests", user_id: @user.id)
+      Profile.create(tagline: :tagline, interests: :interests, user_id: @user.id)
       UserMailer.with(user: @user).welcome_email.deliver_now
     end
   end
@@ -45,14 +44,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:profile_photo, :tagline, :interests])
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:profile_photo, :tagline, :interests])  
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)

@@ -33,6 +33,7 @@
 
   <h1>Comments</h1>
     <% @event.comments.each do | comment | %>
+    <br>  
     <div class="card">
       <h5 class="card-header">Author: <%= User.find(comment.user_id).email %></h5>
       <div class="card-body">
@@ -41,10 +42,9 @@
         <p class="card-text"><%= comment.body %></p>
         <%= form_with(model: @event, url: organization_event_comment_path(@event.organization, comment), method: 'delete' ) do |f| %>
         <%= f.submit "Destroy" %>
-    <% end %>
+        <% end %>
       </div>
     </div>
-    <br>
   <% end %>
 </div>
 

@@ -4,10 +4,11 @@
       <h3>
       <br>
         Organizations on PL
-        <br>
+        <br><br>
       </h3>
       <br>
         <% @organizations.each do | organization | %>
+        <br>
           <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="https://www.sweetwater.com/insync/media/2020/03/Nashville-Cellphone-Choir-Featured-Image.jpg" alt="Card image cap">
             <div class="card-body">
@@ -18,14 +19,15 @@
               <% if organization.user_id = current_user.id %>
               <%= link_to "Edit", organization, class: "btns btn-outline-danger" %>
               <% end %>
-            </div>
+              </div>
+              </div>
           </div>
           <br><br>
         <% end %>
-        <br>
+        <br>  <br>
     <% if @page > 1 %><%= link_to "<- Previous 4", organizations_path(page: @page - 1), class: "btn btn-secondary" %> <% end %>
-    <%= link_to "Next 4 ->", organizations_path(page: @page + 1), class: "btn btn-primary"%>
-</div>
+    <% if @organizations.count > 4 %> <%= link_to "Next 4 ->", organizations_path(page: @page + 1), class: "btn btn-primary" %> <% end %>
+
   <div class="col">
     <br>
     <h3>
@@ -38,6 +40,7 @@
       <br>  <h5>Title:</h5><%= form.text_field :title %>
       <br>  <h5>Description:</h5><%= form.text_field :description %>
       <br>  <h5>Location:</h5><%= form.text_field :location %>
+      <br>  <p>Upload photo:</p> <%= form.file_field :org_photo %>
       <br>  <%= form.hidden_field :user_id, :value => current_user.id %>
       <br>
       <%= form.submit "Submit a New Organization", :class => 'btn-primary btn' %>

@@ -1,0 +1,13 @@
+ <%= form_with model: @profile, method: patch do |f| %> 
+    <div class="field">
+        <%= f.text_field :tagline %>
+    </div>
+
+    <div class="field">
+        <%= f.text_field :interests %>
+    </div>
+
+    <div class="actions">
+        <%= f.submit "Submit" %>
+    </div>
+<% end %>

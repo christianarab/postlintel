@@ -2,6 +2,7 @@
       <br>  <p>Title:</p><%= form.text_field :title %>
       <br>  <p>Description:</p><%= form.text_field :description %>
       <br>  <p>Location:</p><%= form.text_field :location %>
+      <br>  <p>Upload photo:</p> <%= form.file_field :org_photo %>
       <br>  <%= form.hidden_field :user_id, :value => current_user.id %>
       <br><br>
       <%= form.submit %>

@@ -16,14 +16,14 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @profile = profile.find(params[:id])
-    @profile.update(profile_params)
-    redirect_to @profile
+    @profile = Profile.find(params[:id])
+    update = @profile.update(profile_params)
+    redirect_to profiles_path
   end
 
   private
 
   def profile_params
-    params.permit(:tagline, :interests, :user_id)
+    params.permit(:tagline, :interests, :id)
   end
 end

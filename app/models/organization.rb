@@ -3,4 +3,5 @@ class Organization < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :events, dependent: :delete_all
   has_many :follows
+  has_one_attached :org_photo
 end
