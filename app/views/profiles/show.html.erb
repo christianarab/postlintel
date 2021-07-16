@@ -1,22 +1,25 @@
 <br><br>
 <h3> Profile Info </h3>
 <br><br><h6> Email addresses:</h6>
-<%= image_tag @profile.user.profile_thumbnail %>
+<%= image_tag @profile.user.profile_thumbnail if @profile.user.profile_thumbnail %>
 <%= @profile.user.email %>
 <br><br><h6> Tagline:</h6>
 <%= @profile.tagline %>
 <br><br><h6> Interests:</h6>
 <%= @profile.interests %>
 <br><br><h6> Created events:</h6>
-<%= @profile.user.events %>
-<br><br><h6> Created organizations: </h6>
-<br>
+<% Event.where(user_id: @profile.user_id).each do | events |  %>
+  <ol>
+    <li>Title: <%= events.title %></li>
+  </ol>
+<% end %>
+<h6> Created organizations: </h6>
 <% Organization.where(user_id: @profile.user_id).each do | org |  %>
   <ul>
     <li>Title: <%= org.title %></li>
     <li>Description: <%= org.description %></li>
     <li>Location: <%= org.location %></li>
-  <ul>
+  </ul>
 <% end %>
 <br>
 <% if current_user.id == @profile.user.id %>

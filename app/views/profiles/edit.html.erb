@@ -1,5 +1,5 @@
 <h3> Edit your Bio </h3>
-    <%= form_with model: @profile, url: profile_path, method: :patch do |f| %> 
+    <%= form_with model: @profile, url: organization_path, method: :patch do |f| %> 
   <div class="field">
     <%= f.label :tagline %><br />
     <%= f.text_field :tagline %>

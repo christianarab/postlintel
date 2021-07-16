@@ -24,6 +24,7 @@
   </div>
   <% if current_user.id = @organization.user_id %>
     <p> You are part of this organization </p>
+    <%= render 'editform' %>
     <% else %>
     <p> You are not part of this organization </p>
     <% end %>

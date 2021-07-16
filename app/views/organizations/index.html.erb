@@ -1,6 +1,4 @@
-<div class="container">
-  <div class="row">
-    <br><br><br>
+<div class="row">
     <h3>
     <br>
       Organizations on PL
@@ -10,9 +8,9 @@
       <% @organizations.each do | organization | %>
       
       <br>
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 20rem;">
         <%= image_tag organization.org_thumbnail, class: "card-img-top" if organization.org_thumbnail %>
-          <div class="card-body">
+          <div class="card-body text-cente">
             <h5 class="card-title"><%= organization.title %></h5>
             <p class="card-text"><%= organization.description %></p>
             <p class="card-text small">Lead by: <%= User.find(organization.user_id).email %></p>
@@ -29,7 +27,7 @@
         <br><br>
   <% if @page > 1 %><%= link_to "<- Previous 4", organizations_path(page: @page - 1), class: "btn btn-secondary" %> <% end %>
   <% if @organizations.count > 3 %> <%= link_to "Next 4 ->", organizations_path(page: @page + 1), class: "btn btn-primary" %> <% end %>
-  </div>
+  
   <div class="col">
     <br>
     <h3>
@@ -39,5 +37,6 @@
     </h3>
     <br>
     <%= render "form" %>
+    </div>
   </div>
 </div>

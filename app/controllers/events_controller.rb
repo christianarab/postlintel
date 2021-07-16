@@ -11,6 +11,7 @@ class EventsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     @event = @organization.events.create(events_params)
     EventMailer.with(user: @user).event_email.deliver_now
+    redirect_back(fallback_location: root_path)
   end
 
   def show

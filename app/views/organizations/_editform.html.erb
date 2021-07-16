@@ -1,5 +1,5 @@
- <h5> Edit </h5>
- <%= form_with model: @organization do |form| %>
+<h2> Edit your organization </h2>
+ <%= form_with model: @organization, url: organization_path, method: :patch do |form| %>
  <div>
     <br>  <h5>Title:</h5><%= form.text_field :title, :required => true %>
     <br>  <h5>Description:</h5><%= form.text_field :description, :required => true %>
@@ -7,6 +7,6 @@
     <br>  <h5>Upload photo:</h5> <%= form.file_field :org_photo, :required => true %>
     <br>  <%= form.hidden_field :user_id, :value => current_user.id %>
     <br>
-    <%= form.submit "Edit", :class => 'btn-primary btn' %>
+    <%= form.submit "Submit", :class => 'btn-primary btn' %>
 <% end %>
 </div>

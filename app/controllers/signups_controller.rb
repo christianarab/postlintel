@@ -8,6 +8,7 @@ class SignupsController < ApplicationController
       @signup = @event.signups.create(signup_params)
       flash[:notice] = "You are now signed up."
     end
+    redirect_back(fallback_location: root_path)
   end
 
   def status
