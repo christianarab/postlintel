@@ -7,11 +7,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = Profile.find(params[:user_id])
-  end
-
-  def show
-    @profile = Profile.find(params[:user_id])
+    @profile = Profile.find(params[:id])
   end
 
   def create

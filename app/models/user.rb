@@ -10,4 +10,10 @@ class User < ApplicationRecord
   has_many :comments, as: :commentable
   has_one :profile
   has_one_attached :profile_photo
+
+  def profile_thumbnail
+    if profile_photo.attached?
+      profile_photo.variant(resize: '100x100!').processed
+    end
+  end
 end

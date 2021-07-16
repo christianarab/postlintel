@@ -73,9 +73,9 @@ ActiveRecord::Schema.define(version: 2021_07_16_085720) do
     t.integer "followed_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "organizations_id", null: false
+    t.bigint "organization_id", null: false
     t.bigint "user_id"
-    t.index ["organizations_id"], name: "index_follows_on_organizations_id"
+    t.index ["organization_id"], name: "index_follows_on_organization_id"
     t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2021_07_16_085720) do
   add_foreign_key "comments", "events"
   add_foreign_key "events", "organizations"
   add_foreign_key "events", "users"
-  add_foreign_key "follows", "organizations", column: "organizations_id"
+  add_foreign_key "follows", "organizations"
   add_foreign_key "organizations", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "signups", "events"

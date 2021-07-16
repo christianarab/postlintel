@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root to: "landing#index"
   # devise users
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   resources :profiles
   resources :events
   resources :organizations do

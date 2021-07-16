@@ -10,11 +10,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super do |resource|
-  #     UserMailer.with(user: @user).welcome_email.deliver_now
-  #   end
-  # end
+  def create
+    super do |resource|
+      puts " I MADE IT HERE"
+      Profile.create(tagline: "Enter your tagline", interests: "Enter your interests", user_id: @user.id)
+      UserMailer.with(user: @user).welcome_email.deliver_now
+    end
+  end
 
   # GET /resource/edit
   # def edit
