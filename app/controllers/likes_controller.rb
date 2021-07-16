@@ -2,13 +2,9 @@ class LikesController < ApplicationController
   before_action :find_event
 
   def create
-    @event = Event.find(params[:event_id])
-    @like = @event.likes.new(like_params)
-    if @like.save
-      redirect_back(fallback_location: root_path)
-    else
-      redirect_back(fallback_location: root_path)
-    end
+    @event.likes.create(like_params)
+    flash[:notice] = "You have liked this event."
+    redirect_back(fallback_location: root_path)
   end
 
   private
@@ -17,6 +13,6 @@ class LikesController < ApplicationController
   end
 
   def like_params
-  params.permit(:user_id, :event_id, :id)
+    params.permit(:user_id, :event_id, :id)
   end
 end

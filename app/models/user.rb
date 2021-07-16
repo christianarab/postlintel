@@ -3,14 +3,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_one :profile
+  has_one_attached :profile_photo
   has_many :organizations
   has_many :signups
   has_many :follows
   has_many :events
   has_many :likes, as: :likeable, dependent: :destroy
-  has_many :comments, as: :commentable
-  has_one :profile
-  has_one_attached :profile_photo
+  has_many :comments, as: :commentable, dependent: :destroy
 
   def profile_thumbnail
     if profile_photo.attached?

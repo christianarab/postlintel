@@ -4,8 +4,8 @@
     <br>  <h5>Title:</h5><%= form.text_field :title, :required => true %>
     <br>  <h5>Description:</h5><%= form.text_field :description, :required => true %>
     <br>  <h5>Location:</h5><%= form.text_field :location, :required => true %>
-    <br>  <h5>Upload photo:</h5> <%= form.file_field :org_photo, :required => true %>
-    <br>  <%= form.hidden_field :user_id, :value => current_user.id %>
+    <br>  <h5>Upload photo:</h5> <%= form.file_field :org_photo %>
+    <br>  <%= form.hidden_field :id %>
     <br>
     <%= form.submit "Submit", :class => 'btn-primary btn' %>
 <% end %>
