@@ -1,0 +1,12 @@
+<h6>Some Users on PL</h6>
+<% Profile.all.each do | profile | %>
+    <div class="card" style="width: 13rem;">
+        <%= image_tag profile.user.profile_thumbnail, class: "card-img-top" if profile.user.profile_thumbnail %>
+        <div class="card-body">
+            <h5 class="card-title"><%= profile.user.email %></h5>
+            <p class="card-text"><%= profile.tagline %></p>
+            <p class="card-text"><%= profile.interests %></p>
+            <a href="#" > <%= link_to "Profile", profile, class: "btn btn-primary"%></a>
+        </div>
+    </div>
+<% end %>  

@@ -34,7 +34,6 @@
 <h6> Number of likes given: </h6>
 <%= Like.where(user_id: @profile.user_id).count %>
 <% if current_user.id == @profile.user.id %>
-  <%= link_to "Edit", edit_profile_path %>
 <% end %>
 <hr>
 <h6> Comments:</h6>
@@ -44,3 +43,4 @@
   </ol>
   <% end %>
 <hr>
+  <%= link_to "Edit", edit_profile_path, class: "btn btn-primary" %>

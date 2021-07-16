@@ -6,6 +6,10 @@ class ProfilesController < ApplicationController
     @profiles = Profile.offset(@page * PROFILES_PER_PAGE).limit(PROFILES_PER_PAGE)
   end
 
+  def all
+    @profiles = Profile.all
+  end
+
   def show
     @profile = Profile.find(params[:id])
   end
