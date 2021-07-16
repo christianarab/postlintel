@@ -1,33 +1,35 @@
-<div class="row">
-  <br>
-      <br>  <br>
-      <h3>
+<div class="container">
+  <div class="row">
+    <br><br><br>
+    <h3>
+    <br>
+      Organizations on PL
+    <br><br>
+    </h3>
+    <br>
+      <% @organizations.each do | organization | %>
+      
       <br>
-        Organizations on PL
+        <div class="card" style="width: 18rem;">
+        <%= image_tag organization.org_thumbnail, class: "card-img-top" if organization.org_thumbnail %>
+          <div class="card-body">
+            <h5 class="card-title"><%= organization.title %></h5>
+            <p class="card-text"><%= organization.description %></p>
+            <p class="card-text small">Lead by: <%= User.find(organization.user_id).email %></p>
+            <a><%= link_to organization.title, organization, class: "btn btn-primary" %></a>
+            <% if organization.user_id == current_user.id %>
+            <br>
+            <%= link_to "Edit your orgnization", organization, class: "btns btn-outline-danger" %>
+            <% end %>
+            </div>
+            </div>
+            <% end %>
+        </div>
         <br><br>
-      </h3>
-      <br>
-        <% @organizations.each do | organization | %>
-        <br>
-          <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="https://www.sweetwater.com/insync/media/2020/03/Nashville-Cellphone-Choir-Featured-Image.jpg" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title"><%= organization.title %></h5>
-              <p class="card-text"><%= organization.description %></p>
-              <p class="card-text">This community is lead by: <%= User.find(organization.user_id).email %></p>
-              <a><%= link_to organization.title, organization, class: "btn btn-primary" %></a>
-              <% if organization.user_id = current_user.id %>
-              <%= link_to "Edit", organization, class: "btns btn-outline-danger" %>
-              <% end %>
-              </div>
-              </div>
-          </div>
-          <br><br>
-        <% end %>
-        <br>  <br>
-    <% if @page > 1 %><%= link_to "<- Previous 4", organizations_path(page: @page - 1), class: "btn btn-secondary" %> <% end %>
-    <% if @organizations.count > 4 %> <%= link_to "Next 4 ->", organizations_path(page: @page + 1), class: "btn btn-primary" %> <% end %>
-
+        <br><br>
+  <% if @page > 1 %><%= link_to "<- Previous 4", organizations_path(page: @page - 1), class: "btn btn-secondary" %> <% end %>
+  <% if @organizations.count > 3 %> <%= link_to "Next 4 ->", organizations_path(page: @page + 1), class: "btn btn-primary" %> <% end %>
+  </div>
   <div class="col">
     <br>
     <h3>
@@ -36,14 +38,6 @@
     <small class="text-muted">Grow your community today.</small>
     </h3>
     <br>
-    <%= form_with model: @organization do |form| %>
-      <br>  <h5>Title:</h5><%= form.text_field :title %>
-      <br>  <h5>Description:</h5><%= form.text_field :description %>
-      <br>  <h5>Location:</h5><%= form.text_field :location %>
-      <br>  <p>Upload photo:</p> <%= form.file_field :org_photo %>
-      <br>  <%= form.hidden_field :user_id, :value => current_user.id %>
-      <br>
-      <%= form.submit "Submit a New Organization", :class => 'btn-primary btn' %>
-    <% end %>
+    <%= render "form" %>
   </div>
-</div
+</div>
