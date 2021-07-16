@@ -1,7 +1,7 @@
 class Organization < ApplicationRecord
   belongs_to :user
-  has_many :comments, as: :commentable
-  has_many :events, dependent: :delete_all
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :events, dependent: :destroy
   has_many :follows
   has_one_attached :org_photo
 

@@ -1,18 +1,27 @@
 <br><br>
 <h3> Profile Info </h3>
-<br><br><h6> Email addresses:</h6>
+<hr>
 <%= image_tag @profile.user.profile_thumbnail if @profile.user.profile_thumbnail %>
 <%= @profile.user.email %>
 <br><br><h6> Tagline:</h6>
 <%= @profile.tagline %>
 <br><br><h6> Interests:</h6>
 <%= @profile.interests %>
-<br><br><h6> Created events:</h6>
-<% Event.where(user_id: @profile.user_id).each do | events |  %>
+<hr>
+<h6> Created events:</h6>
+<% Event.where(user_id: @profile.user_id).each do | event |  %>
   <ol>
-    <li>Title: <%= events.title %></li>
+    <li>Title: <%= event.title %></li>
   </ol>
 <% end %>
+<hr>
+<h6> Signedup events:</h6>
+<% User.signuped_events(@profile.user_id).each do | event |%>
+  <ol>
+    <li>Title: <%= event.title %></li>
+  </ol>
+  <% end %>
+<hr>
 <h6> Created organizations: </h6>
 <% Organization.where(user_id: @profile.user_id).each do | org |  %>
   <ul>
@@ -21,7 +30,17 @@
     <li>Location: <%= org.location %></li>
   </ul>
 <% end %>
-<br>
+<hr>
+<h6> Number of likes given: </h6>
+<%= Like.where(user_id: @profile.user_id).count %>
 <% if current_user.id == @profile.user.id %>
   <%= link_to "Edit", edit_profile_path %>
 <% end %>
+<hr>
+<h6> Comments:</h6>
+<% User.signuped_events(@profile.user_id).each do | event |%>
+  <ol>
+    <li>Title: <%= event.title %></li>
+  </ol>
+  <% end %>
+<hr>

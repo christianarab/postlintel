@@ -11,7 +11,7 @@ class OrganizationsController < ApplicationController
   end
 
   def create
-    @organization = Organization.create(org_params)
+    @organization = Organization.create!(org_params)
     redirect_to @organization
   end
 
@@ -22,8 +22,7 @@ class OrganizationsController < ApplicationController
   end
 
   private
-
   def org_params
-    params.require(:organization).permit(:organization_id, :title, :description, :location, :organization, :id)
+    params.require(:organization).permit(:user_id, :organization_id, :title, :description, :location, :org_photo, :id)
   end
 end
