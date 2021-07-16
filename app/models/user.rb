@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :follows
   has_many :events
   has_many :comments, as: :commentable
+  has_one_attached :profile_photo
 end
