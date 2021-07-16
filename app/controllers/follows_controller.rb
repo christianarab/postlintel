@@ -10,6 +10,7 @@ class FollowsController < ApplicationController
       puts "There was a problem."
       puts followreq.errors.messages
     end
+    redirect_to organization_follows_path
   end
 
   private

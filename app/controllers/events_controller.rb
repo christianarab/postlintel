@@ -10,6 +10,7 @@ class EventsController < ApplicationController
   def create
     @organization = Organization.find(params[:organization_id])
     @event = @organization.events.create(events_params)
+    EventMailer.with(user: @user).event_email.deliver_now
   end
 
   def show

@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  PROFILES_PER_PAGE = 4
+  PROFILES_PER_PAGE = 6
   
   def index
     @page = params.fetch(:page, 0).to_i
@@ -17,13 +17,13 @@ class ProfilesController < ApplicationController
 
   def update
     @profile = Profile.find(params[:id])
-    update = @profile.update(profile_params)
-    redirect_to profiles_path
+    @profile.update!(profile_params)
+    redirect_to @profile
   end
 
   private
 
   def profile_params
-    params.permit(:tagline, :interests, :id)
+    params.permit(:tagline, :interests, :id, :user_id)
   end
 end

@@ -1,13 +1,19 @@
- <%= form_with model: @profile, method: patch do |f| %> 
-    <div class="field">
-        <%= f.text_field :tagline %>
-    </div>
+<h3> Edit your Bio </h3>
+    <%= form_with model: @profile, url: profile_path, method: :patch do |f| %> 
+  <div class="field">
+    <%= f.label :tagline %><br />
+    <%= f.text_field :tagline %>
+  </div>
 
     <div class="field">
-        <%= f.text_field :interests %>
+    <%= f.label :interests %><br />
+    <%= f.text_field :interests %>
     </div>
 
     <div class="actions">
-        <%= f.submit "Submit" %>
+    <br>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.submit "Submit" %>
+    <br>
     </div>
 <% end %>

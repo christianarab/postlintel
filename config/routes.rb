@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
+ 
   resources :profiles
+  
   resources :events
+
   resources :organizations do
     resources :follows
     resources :events do
