@@ -10,4 +10,15 @@ class Organization < ApplicationRecord
       org_photo.variant(resize: '100x100!').processed
     end
   end
+
+  def followed?(user)
+    puts "This is the user ID: #{user.id}"
+    # return false unless self.signups.include?(user.id)
+    follow = follows.find { | follow | follow.user_id == user.id } 
+    if follow.nil?
+      false
+    else
+      true
+    end
+  end
 end

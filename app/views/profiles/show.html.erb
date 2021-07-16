@@ -1,17 +1,24 @@
 <br><br>
 <h3> Profile Info </h3>
-
-<h6> Email addresses:</h6>
+<br><br><h6> Email addresses:</h6>
+<%= image_tag @profile.user.profile_thumbnail %>
 <%= @profile.user.email %>
-<br> <h6> Tagline:</h6>
+<br><br><h6> Tagline:</h6>
 <%= @profile.tagline %>
-<br> <h6> Interests:</h6>
+<br><br><h6> Interests:</h6>
 <%= @profile.interests %>
-<br> <h6> Created events:</h6>
+<br><br><h6> Created events:</h6>
 <%= @profile.user.events %>
-<br> <h6> Created organizations: </h6>
-<%= @profile.user.organizations %>
-
+<br><br><h6> Created organizations: </h6>
+<br>
+<% Organization.where(user_id: @profile.user_id).each do | org |  %>
+  <ul>
+    <li>Title: <%= org.title %></li>
+    <li>Description: <%= org.description %></li>
+    <li>Location: <%= org.location %></li>
+  <ul>
+<% end %>
+<br>
 <% if current_user.id == @profile.user.id %>
   <%= link_to "Edit", edit_profile_path %>
 <% end %>

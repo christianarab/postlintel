@@ -3,10 +3,10 @@ class SignupsController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
     if @event.signed_up? current_user
-      puts "Current user already signed up"
+      flash[:alert] = "You are already signed up."
     else
       @signup = @event.signups.create(signup_params)
-      puts "Current user is now signed up"
+      flash[:notice] = "You are now signed up."
     end
   end
 
