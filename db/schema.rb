@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_15_232249) do
+ActiveRecord::Schema.define(version: 2021_07_16_085720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 2021_07_15_232249) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "organizations_id", null: false
-    t.bigint "users_id"
+    t.bigint "user_id"
     t.index ["organizations_id"], name: "index_follows_on_organizations_id"
-    t.index ["users_id"], name: "index_follows_on_users_id"
+    t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -87,6 +87,15 @@ ActiveRecord::Schema.define(version: 2021_07_15_232249) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_organizations_on_user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.text "tagline"
+    t.text "interests"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "signups", force: :cascade do |t|
@@ -118,5 +127,6 @@ ActiveRecord::Schema.define(version: 2021_07_15_232249) do
   add_foreign_key "events", "users"
   add_foreign_key "follows", "organizations", column: "organizations_id"
   add_foreign_key "organizations", "users"
+  add_foreign_key "profiles", "users"
   add_foreign_key "signups", "events"
 end
