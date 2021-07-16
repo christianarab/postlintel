@@ -13,7 +13,10 @@ Rails.application.routes.draw do
     resources :follows
     resources :events do
       resources :signups, only: [:create, :destroy]
-      resources :comments
+      resources :comments do
+        resources :likes
+      end
+      resources :likes
     end
   end
 end

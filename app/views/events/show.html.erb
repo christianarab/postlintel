@@ -6,6 +6,9 @@
         <h5 class="card-title"><%= @event.title %></h5>
         <p class="card-text"><%= @event.location %></p>
         <p class="card-text"><%= @event.description %></p>
+        <p class="card-text"><p><%= @event.likes.count %> <%= (@event.likes.count) == 1 ? 'Like' : 'Likes'%></p></p>
+        <p class="card-text"><p><%= button_to 'Like', organization_event_likes_path(@event.organization.id, @event.id), method: :post %>
+</p></p>
         <%= link_to "link", organization_event_path(@event.organization_id, @event.id) %>
         <%= link_to "delete", organization_event_path(@event.organization_id, @event), :method => 'delete' %>
         <%= form_with(model: @signup, url: organization_event_signups_path(@event.organization, @event)) do |f| %>

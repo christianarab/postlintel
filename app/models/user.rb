@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :signups
   has_many :follows
   has_many :events
+  has_many :likes, as: :likeable, dependent: :destroy
   has_many :comments, as: :commentable
   has_one :profile
   has_one_attached :profile_photo
