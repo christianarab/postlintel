@@ -9,18 +9,18 @@
       <br>
         <div class="card" style="width: 10rem;">
         <%= image_tag organization.org_thumbnail, class: "card-img-top" if organization.org_thumbnail %>
-          <div class="card-body text-cente">
-            <h5 class="card-title"><%= organization.title %></h5>
-            <p class="card-text"><%= organization.description %></p>
-            <p class="card-text small">Lead by: <%= User.find(organization.user_id).email %></p>
-            <a><%= link_to organization.title, organization, class: "btn btn-primary" %></a>
-            <% if organization.user_id == current_user.id %>
-            <br>
-            <%= link_to "Edit your orgnization", organization, class: "btns btn-outline-danger" %>
-            <% end %>
-            </div>
-            </div>
-            <% end %>
+        <div class="card-body text-cente">
+          <h5 class="card-title"><%= organization.title %></h5>
+          <p class="card-text"><%= organization.description %></p>
+          <p class="card-text small">Lead by: <%= User.find(organization.user_id).email %></p>
+          <a><%= link_to organization.title, organization, class: "btn btn-primary" %></a>
+          <% if organization.user_id == current_user.id %>
+          <br>
+          <%= link_to "Edit your orgnization", organization, class: "btns btn-outline-danger" %>
+          <% end %>
+          </div>
+          </div>
+          <% end %>
         </div>
   <% if @page > 1 %><%= link_to "<- Previous 4", organizations_path(page: @page - 1), class: "btn btn-secondary" %> <% end %>
   <% if @organizations.count > 3 %> <%= link_to "Next 4 ->", organizations_path(page: @page + 1), class: "btn btn-primary" %> <% end %>

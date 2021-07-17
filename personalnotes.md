@@ -1,1 +1,0 @@
-How can I show name of user instead of id?
