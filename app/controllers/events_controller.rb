@@ -11,6 +11,12 @@ class EventsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     @event = @organization.events.create(events_params)
     EventMailer.with(user: @user).event_email.deliver_now
+    redirect_to @event
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    @event.update!(events_params)
     redirect_back(fallback_location: root_path)
   end
 
@@ -28,6 +34,10 @@ class EventsController < ApplicationController
   private
 
   def events_params
-    params.permit(:title, :description, :location, :user_id, :start_date_time, :end_date_time, :organization_id)
+    if params[:event].present?
+      params.require(:event).permit(:title, :description, :location, :user_id, :start_date_time, :end_date_time, :organization_id)
+    else 
+      params.permit(:title, :description, :location, :user_id, :start_date_time, :end_date_time, :organization_id)
+    end
   end
 end

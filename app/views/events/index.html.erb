@@ -4,22 +4,24 @@
   Events
   </h3>
   <br>
-  <% if @events.nil? %>
-    <p> No events </p>
-  <% end %>
-  
-  <p>There are no events listed</p>
-  <% @events.each do | event | %>
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title"><%= event.title %></h5>
-        <p class="card-text">Organization: <%= event.organization.title %></p>
-        <p class="card-text">Location: <%= event.location %></p>
-        <p class="card-text">Description: <%= event.description %></p>
-        <%= link_to "link to details", organization_event_path(event.organization_id, event.id), class: "btn btn-primary" %>
-        <%= button_to "delete", organization_event_path(event.organization_id, event.id), method: :delete %>
+  <% if !@events.present? %>
+    <p>There are no events listed</p>
+  <% else %>
+    <% @events.each do | event | %>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= event.title %></h5>
+          <p class="card-text"><strong>Organization:</strong> <%= event.organization.title %></p>
+          <p class="card-text"><strong>Location:</strong> <%= event.location %></p>
+          <p class="card-text"><strong>Description:</strong> <%= event.description %></p>
+          <%= link_to "link to details", organization_event_path(event.organization_id, event.id), class: "btn btn-primary" %>
+          <% if event.user_id == current_user.id %>
+            <%= button_to "delete", organization_event_path(event.organization_id, event.id), method: :delete %>
+          <% end %>
+        </div>
       </div>
-    </div>
+      <br>
+    <% end %>
   <% end %>
   <%= link_to 'Back', :back %>
 </div>

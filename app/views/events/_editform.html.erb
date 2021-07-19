@@ -18,9 +18,9 @@
     <br>
     <%= f.datetime_select :end_date_time, type: "date", class: "input form-control" %>
     <br>  
-    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :event_id, :value => @event.id %>
     <br>  
-    <%= f.submit "Create Event", class: "btn btn-primary" %>
+    <%= f.submit "Update Event", class: "btn btn-primary" %>
     <br> 
 <% end %>
 </div>

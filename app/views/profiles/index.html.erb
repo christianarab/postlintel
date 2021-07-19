@@ -1,14 +1,17 @@
-<div class="container mt-5 d-flex justify-content-center">
+<h1 class="display-3">Profiles on Post Lintel</h1>
+<br>
+<br>
+<div class="container">
     <% @profiles.each do | profile | %>
-    <div class="card p-3">
-        <div class="d-flex align-items-center">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
             <div class="image"><%= image_tag profile.user.profile_thumbnail, class: "rounded", width: "155" if profile.user.profile_thumbnail %></div>
-            <div class="ml-3 w-100">
-                <h4 class="mb-0 mt-0"><%= profile.user.email %></h4> <span><%= profile.tagline %></span>
-                <%= link_to "Profile", profile, class: "btn btn-primary"%>
-            </div>
+            <h5 class="card-title"><%= profile.user.email %></h5>
+            <p class="card-text"><%= profile.tagline %></p>
+            <%= link_to "Profile", profile, class: "btn btn-primary" %>
         </div>
     </div>
-    <br><br>
+    <br>
     <% end %>
 </div>
+
