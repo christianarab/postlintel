@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
+  validates :profile_photo, :presence => true
 
   def profile_thumbnail
     if profile_photo.attached?
