@@ -33,15 +33,14 @@
     <br>
     <h1 class="display-6">Attendees</h1>
     <br>
-    <% @event.signups.each do | signup | %>
-      <div class="card w-10 p-1" style="width: 13rem;">
+      <div class="card" style="width: 8rem;">
         <div class="card-body">
-          <img src="https://www.fairtravel4u.org/wp-content/uploads/2018/06/sample-profile-pic.png" class="rounded-circle img-thumbnail">
-            <h6 class="card-title"> <%= User.find(signup.user_id).email %></h6>
+        <% @event.signups.each do | signup | %>
+          <a href="<%= profile_path(signup.user_id) %>"><img src="https://www.fairtravel4u.org/wp-content/uploads/2018/06/sample-profile-pic.png" class="rounded-circle img-thumbnail"></a>
+          <% end %>
         </div>
-          </div>
+        </div>
         <br>
-        <% end %>
   </div>
   <h1 class="display-6">Comments</h1>
   <% @event.comments.each do | comment | %>
@@ -70,5 +69,3 @@
   <%= f.submit %>
 <% end %>
 </div>
-
-
