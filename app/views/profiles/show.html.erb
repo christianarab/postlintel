@@ -47,24 +47,26 @@
         </ul>
       <% end %>
       <hr>
-      <h6> Number of likes recieved: </h6>
+      <h6> Likes recieved: </h6>
       <% Like.where(user_id: @profile.user_id).each do |like| %>
-        <ol>
-          <% if like.likeable_type = "Event" %>
-          <%= link_to like.event_id, event_path(like.event_id) %>
+        <% if like.likeable_type = "Event" %>
+          <ul>
+            <li>Like on: <%= link_to like.likeable_type, event_path(like.event_id) %></li>
+          <% elsif like.likeable_type = "Comment" %>
+            <li>Like on: <%= link_to like.likeable_type, event_path(like.event_id) %></li>
           <% else %>
-          asdfasdf
+            <p>None yet</p>
           <% end %>
-        </ol>
+          </ul>
       <% end %>
-      <% if current_user.id == @profile.user.id %>
+      <hr>      
+      <% if current_user.id == @profile.user_id %>
+        <%= link_to "Edit", edit_profile_path, class: "btn btn-primary" %>
       <% end %>
-      <hr>
-      <%= link_to "Edit", edit_profile_path, class: "btn btn-primary" %>
     </div>
     <div class="col">
       <h1> Recent Activity </h1>
-        <% likes_given(@profile.user_id).each_with_index do |like| %>
+      <% likes_given(@profile.user_id).each do |like| %>
         <div class="card">
           <div class="card-header">
             <h2>Like on <%= like.likeable_type %></h2>
@@ -79,7 +81,7 @@
           </div>
         </div>
         <br>
-        <% end %>
+      <% end %>
       </div>
 </div>
 

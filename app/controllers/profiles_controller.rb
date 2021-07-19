@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+  helper_method :likes_given
+  helper_method :comments_given
   PROFILES_PER_PAGE = 6
   
   def index
@@ -24,6 +26,32 @@ class ProfilesController < ApplicationController
     @profile.update!(profile_params)
     redirect_to @profile
   end
+
+  # Retrieves list of comments given by user
+  def comments_given(user_id)
+    comments = Comment.where(user_id: user_id)
+  end
+
+  # Retrieves user given 'likes'
+  def likes_given(user_id)
+    likes = Like.where(user_id: user_id)
+  end
+
+  # Retrieves organization memberships/follows given by user
+  def follows_given(user_id)
+    follows = Follow.where(user_id: user_id)
+  end
+
+  # Retrieves 'likes' recieved on events
+  def popularity_counter(user_id)
+    likes_counter = 0
+    events = Event.all.where(user_id: user_id)
+    events.each do |event| 
+      likes_counter += event.likes.count
+    end
+      likes_counter
+  end
+
 
   private
 

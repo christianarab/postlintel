@@ -1,6 +1,8 @@
 <div class="row ">
+  <br>
   <div class="col">
-    <h1>Details:</h1>
+    <br>
+    <h1 class="display-6">Details</h1>
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title"><%= @event.title %></h5>
@@ -23,11 +25,14 @@
     </div>
   </div>
   <div class="col">
-    <h1>Edit:</h1>
+    <br>
+    <h1 class="display-6">Edit</h1>
     <%= render "editform" %>
   </div>
   <div class="col">
-    <h1>Attendees:</h1>
+    <br>
+    <h1 class="display-6">Attendees</h1>
+    <br>
     <% @event.signups.each do | signup | %>
       <div class="card w-10 p-1" style="width: 13rem;">
         <div class="card-body">
@@ -38,8 +43,8 @@
         <br>
         <% end %>
   </div>
-  <h1>Comments</h1>
-    <% @event.comments.each do | comment | %>
+  <h1 class="display-6">Comments</h1>
+  <% @event.comments.each do | comment | %>
     <br>  
     <div class="card">
       <h5 class="card-header">Author: <%= User.find(comment.user_id).email %></h5>
@@ -49,18 +54,21 @@
         <p class="card-text"><%= comment.body %></p>
          <p class="card-text"><p><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></p></p>
         <p class="card-text"><p><%= button_to 'Like', organization_event_comment_likes_path(@event.organization, @event.id, comment.id), method: :post, params: {:user_id => current_user.id, :status => "true"} %>
-        <%= form_with(model: @event, url: organization_event_comment_path(@event.organization, comment), method: 'delete' ) do |f| %>
-        <%= f.submit "Destroy" %>
+        <p class="card-text"><p><%= button_to 'unlike', organization_event_comment_like_path(@event.organization, @event.id, comment.id), method: :delete, params: {:user_id => current_user.id, :status => "false"} %></p>
+        <% if current_user.id == comment.user_id %>
+          <%= form_with(model: @event, url: organization_event_comment_path(@event.organization, comment), method: 'delete' ) do |f| %>
+          <%= f.submit "Destroy" %>
+         <% end %>
         <% end %>
       </div>
     </div>
   <% end %>
-</div>
-
-
-<%= form_with(model: @comment, url: organization_event_comments_path(@event.organization, @event), method: 'post' ) do |f| %>
+<%= form_with(model: @comment, url: organization_event_comments_path(@event.organization, @event), method: 'post') do |f| %>
   <%= f.text_area :body %>
   <%= f.hidden_field :user_id, :value => current_user.id %>
   <br>
   <%= f.submit %>
 <% end %>
+</div>
+
+

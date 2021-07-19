@@ -15,7 +15,7 @@ class LikesController < ApplicationController
 
   def destroy
     if find_comment
-      like = Like.find_by(user_id: params[:user_id], comment_id: params[:comment_id])
+      like = Like.find_by(likeable_type: "Comment", user_id: params[:user_id], event_id: params[:event_id], likeable_id: params[:comment_id])
       like.destroy if like.present?
       flash[:notice] = "Event unliked!"
     elsif find_event
