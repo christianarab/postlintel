@@ -6,17 +6,16 @@ Rails.application.routes.draw do
   }
  
   resources :profiles
-  
   resources :events
 
   resources :organizations do
-    resources :follows
+    resources :follows 
     resources :events do
       resources :signups, only: [:create, :destroy]
       resources :comments do
-        resources :likes
+        resources :likes, only: [:create, :destroy]
       end
-      resources :likes
+      resources :likes, only: [:create, :destroy]
     end
   end
 end
