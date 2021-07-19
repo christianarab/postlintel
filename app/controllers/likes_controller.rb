@@ -10,7 +10,19 @@ class LikesController < ApplicationController
       @event.likes.create(like_params)
       flash[:notice] = "Event liked!"
     end
+    redirect_back(fallback_location: root_path)
+  end
 
+  def destroy
+    if find_comment
+      like = Like.find_by(user_id: params[:user_id], comment_id: params[:comment_id])
+      like.destroy if like.present?
+      flash[:notice] = "Event unliked!"
+    elsif find_event
+      like = Like.find_by(user_id: params[:user_id], event_id: params[:event_id])
+      like.destroy if like.present?
+      flash[:notice] = "Event unliked!"
+    end
     redirect_back(fallback_location: root_path)
   end
 

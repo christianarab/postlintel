@@ -6,10 +6,12 @@
         <h5 class="card-title"><%= @event.title %></h5>
         <p class="card-text"><%= @event.location %></p>
         <p class="card-text"><%= @event.description %></p>
-        <p class="card-text"><p><%= @event.likes.count %> <%= (@event.likes.count) == 1 ? 'Like' : 'Likes'%></p></p>
-        <p class="card-text"><p><%= button_to 'Like', organization_event_likes_path(@event.organization.id, @event.id), method: :post,  params: {:user_id => current_user.id} %>
-</p></p>
         <%= link_to "link", organization_event_path(@event.organization_id, @event.id) %>
+        <p class="card-text"><p><%= @event.likes.count %> <%= (@event.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+       <% if @event.likes.where(:user_id => current_user.id) %>
+        <p class="card-text"><p><%= button_to 'Like', organization_event_likes_path(@event.organization.id, @event.id), method: :post, params: {:user_id => current_user.id, :status => "true"} %></p>
+          <%= button_to 'unlike', organization_event_like_path(@event.organization.id, @event.id), method: :delete, params: {:user_id => current_user.id, :status => "false"} %></p>
+        <% end %>
         <%= link_to "delete", organization_event_path(@event.organization_id, @event.id), method: :delete %>
         <%= form_with(model: @signup, url: organization_event_signups_path(@event.organization, @event)) do |f| %>
           <%= f.hidden_field :user_id, :value => current_user.id %>
@@ -19,6 +21,10 @@
         <br>  
       </div>
     </div>
+  </div>
+  <div class="col">
+    <h1>Edit:</h1>
+    <%= render "editform" %>
   </div>
   <div class="col">
     <h1>Attendees:</h1>
@@ -32,8 +38,6 @@
         <br>
         <% end %>
   </div>
-
-
   <h1>Comments</h1>
     <% @event.comments.each do | comment | %>
     <br>  
@@ -44,7 +48,7 @@
         <h6 class="card-title">Comment ID: <%= comment.id %></h6>
         <p class="card-text"><%= comment.body %></p>
          <p class="card-text"><p><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></p></p>
-        <p class="card-text"><p><%= button_to 'Like', organization_event_comment_likes_path(@event.organization, @event.id, comment.id), method: :post, params: {:user_id => current_user.id} %>
+        <p class="card-text"><p><%= button_to 'Like', organization_event_comment_likes_path(@event.organization, @event.id, comment.id), method: :post, params: {:user_id => current_user.id, :status => "true"} %>
         <%= form_with(model: @event, url: organization_event_comment_path(@event.organization, comment), method: 'delete' ) do |f| %>
         <%= f.submit "Destroy" %>
         <% end %>

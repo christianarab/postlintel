@@ -1,46 +1,101 @@
 <br><br>
 <h3> Profile Info </h3>
 <hr>
-<%= image_tag @profile.user.profile_thumbnail if @profile.user.profile_thumbnail %>
-<%= @profile.user.email %>
-<br><br><h6> Tagline:</h6>
-<%= @profile.tagline %>
-<br><br><h6> Interests:</h6>
-<%= @profile.interests %>
-<hr>
-<h6> Created events:</h6>
-<% Event.where(user_id: @profile.user_id).each do | event |  %>
-  <ol>
-    <li>Title: <%= event.title %></li>
-  </ol>
-<% end %>
-<hr>
-<h6> Signedup events:</h6>
-<% User.signuped_events(@profile.user_id).each do | event |%>
-  <ol>
-    <li>Title: <%= event.title %></li>
-  </ol>
-  <% end %>
-<hr>
-<h6> Created organizations: </h6>
-<% Organization.where(user_id: @profile.user_id).each do | org |  %>
-  <ul>
-    <li>Title: <%= org.title %></li>
-    <li>Description: <%= org.description %></li>
-    <li>Location: <%= org.location %></li>
-  </ul>
-<% end %>
-<hr>
-<h6> Number of likes given: </h6>
-<%= Like.where(user_id: @profile.user_id).count %>
-<% if current_user.id == @profile.user.id %>
-<% end %>
-<hr>
-<h6> Comments:</h6>
-<% User.signuped_events(@profile.user_id).each do | event |%>
-  <ol>
-    <li>Title: <%= event.title %></li>
-  </ol>
-  <% end %>
-<hr>
-  <%= link_to "Edit", edit_profile_path, class: "btn btn-primary" %>
+<br >
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= image_tag @profile.user.profile_thumbnail if @profile.user.profile_thumbnail %>
+      <%= @profile.user.email %>
+      <br><br><h6> Tagline:</h6>
+      <%= @profile.tagline %>
+      <br><br><h6> Interests:</h6>
+      <%= @profile.interests %>
+      <hr>
+      <h6> Created events:</h6>
+      <div class="accordion accordion-flush">
+        <% Event.where(user_id: @profile.user_id).each do | event |  %>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <%= event.title %>
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+            <%= link_to "link", event %>
+            <em><%= "#{event.start_date_time} to #{event.end_date_time}"%></em></div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <hr>
+      <h6> Signedup events:</h6>
+      <% User.signuped_events(@profile.user_id).each do | event |%>
+        <ul>
+          <li><%= link_to event.title, event %>
+          <em><%= "#{event.start_date_time} to #{event.end_date_time}"%></em></li>
+        </ul>
+        <% end %>
+      <hr>
+      <h6> Created organizations: </h6>
+      <% Organization.where(user_id: @profile.user_id).each do | org |  %>
+        <ul>
+          <li>Title: <%= org.title %></li>
+          <li>Description: <%= org.description %></li>
+          <li>Location: <%= org.location %></li>
+        </ul>
+      <% end %>
+      <hr>
+      <h6> Number of likes recieved: </h6>
+      <% Like.where(user_id: @profile.user_id).each do |like| %>
+        <ol>
+          <% if like.likeable_type = "Event" %>
+          <%= link_to like.event_id, event_path(like.event_id) %>
+          <% else %>
+          asdfasdf
+          <% end %>
+        </ol>
+      <% end %>
+      <% if current_user.id == @profile.user.id %>
+      <% end %>
+      <hr>
+      <%= link_to "Edit", edit_profile_path, class: "btn btn-primary" %>
+    </div>
+    <div class="col">
+      <h1> Recent Activity </h1>
+        <% likes_given(@profile.user_id).each_with_index do |like| %>
+        <div class="card">
+          <div class="card-header">
+            <h2>Like on <%= like.likeable_type %></h2>
+          </div>
+          <div class="card-body">
+          <% if like.likeable_type == "Event" %>
+            <h6 class="card-title">Event: <%= Event.find(like.event_id).title %></h6>
+            <% elsif like.likeable_type == "Comment" %>
+            <p class="card-text"><%= Comment.find(like.likeable_id).body %></p>
+              <% end %>
+            <p><%= link_to "link", event_path(like.event_id) %></p>
+          </div>
+        </div>
+        <br>
+        <% end %>
+      </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  
+ 

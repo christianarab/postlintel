@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |resource|
-      Profile.create(tagline: :tagline, interests: :interests, user_id: @user.id)
+      Profile.create(tagline: "Edit your tagline", interests: "Edit your interests", user_id: @user.id)
       UserMailer.with(user: @user).welcome_email.deliver_now
     end
   end

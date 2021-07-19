@@ -1,14 +1,13 @@
-<nav class="navbar navbar-dark  bg-primary">
+<nav class="navbar navbar-dark" style="background-color: #4b5557;">
 
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       <i class="fas fa-flag"></i>
-      <h1 class="text-white">PL</h1>
+      <span class="text-white border border-5">PL</span>
+      <h1 class="text-white"></h1>
     </a>
           <div>
-        <% if user_signed_in? %>
-      <p class="text-white"> <%= current_user.email %> is logged in.<p>
-        <% end %>
+
     </div>
     <br>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

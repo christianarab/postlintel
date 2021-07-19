@@ -4,6 +4,7 @@ class Organization < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :follows
   has_one_attached :org_photo
+  validates :org_photo, presence: true
 
   def org_thumbnail
     if org_photo.attached?

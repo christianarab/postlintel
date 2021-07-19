@@ -1,9 +1,14 @@
 <div class="col">
   <br>
   <h3>
-  All Events <br>
+  Events
   </h3>
   <br>
+  <% if @events.nil? %>
+    <p> No events </p>
+  <% end %>
+  
+  <p>There are no events listed</p>
   <% @events.each do | event | %>
     <div class="card" style="width: 18rem;">
       <div class="card-body">
@@ -15,5 +20,6 @@
         <%= button_to "delete", organization_event_path(event.organization_id, event.id), method: :delete %>
       </div>
     </div>
-    <% end %>
+  <% end %>
+  <%= link_to 'Back', :back %>
 </div>

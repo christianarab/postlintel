@@ -1,41 +1,85 @@
-<div class="row">
-    <h3>
-    <br>
-      Organizations on PL
-    <br><br>
-    </h3>
-    <br>
-      <% @organizations.each do | organization | %>
-      <br>
-        <div class="card" style="width: 10rem;">
-        <%= image_tag organization.org_thumbnail, class: "card-img-top" if organization.org_thumbnail %>
-        <div class="card-body text-cente">
-          <h5 class="card-title"><%= organization.title %></h5>
-          <p class="card-text"><%= organization.description %></p>
-          <p class="card-text small">Lead by: <%= User.find(organization.user_id).email %></p>
-          <a><%= link_to organization.title, organization, class: "btn btn-primary" %></a>
-          <% if organization.user_id == current_user.id %>
-          <br>
-          <%= link_to "Edit your orgnization", organization, class: "btns btn-outline-danger" %>
-          <% end %>
-          </div>
-          </div>
-          <% end %>
-        </div>
-  <% if @page > 1 %><%= link_to "<- Previous 4", organizations_path(page: @page - 1), class: "btn btn-secondary" %> <% end %>
-  <% if @organizations.count > 3 %> <%= link_to "Next 4 ->", organizations_path(page: @page + 1), class: "btn btn-primary" %> <% end %>
-  <hr>
-  <%=  render partial: "profiles/gallery"%>
-    <hr>
-  <div class="col">
-    <br>
-    <h3>
-    Create a New Organization
-    <br>
-    <small class="text-muted">Grow your community today.</small>
-    </h3>
-    <br>
-    <%= render "form" %>
+<div class="container">
+  <br><br>
+  <h1 class="display-1">Post and Lintel</h1>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <h6>Welcome to Post Lintel, <%= current_user.email %></h6>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <br><br>
+  <div class="container marketing">
+      <h2 class="featurette-heading">Our groups</h2>
+      <div class="row">
+        <div class="row featurette">
+          <% @organizations.each do | organization | %>
+          <div class="col-sm-3">
+            <%= image_tag organization.org_thumbnail, class: "bd-placeholder-img rounded-circle" if organization.org_thumbnail %>
+              <h2><%= organization.title %></h2>
+              <p><%= organization.description %></p>
+            <%= link_to "Details", organization, class: "btn btn-primary btn-sm" %></a>
+            </div>
+            <% end %>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+              <% if @page >= 1 %><%= link_to "<- Previous 4", organizations_path(page: @page - 1), class: "btn btn-primary me-md-2" %> <% end %>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+             <% if @organizations.count > 3 %> <%= link_to "Next 4 ->", organizations_path(page: @page + 1), class: "btn btn-primary me-md-2" %> <% end %>
+            </div>
+            </div>
+           </div>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+      </div><!-- /.row -->
     </div>
   </div>
+</div>
+      <!-- START THE FEATURETTES -->
+<div class="container">
+  <hr class="featurette-divider">
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">Create an Organization.</h2>
+      <p class="lead">The bridge for community leaders to communicate and share concerns, events, and other viable forms of information - specific to time and place.</p>
+      </div>
+        <div class="col-md-5">
+           <%= render "form" %>
+        </div>
+        </div>
+
+        <hr class="featurette-divider">
+        <br>
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Put on some Events!</h2>
+            <p class="lead">Unique to P/L is the the interactivity of users to user generated events with blog systems. Users of P/L are able to create content - without the restrictions and limitations of such platforms as FaceBook and Meetup!</p>
+            <%= link_to "See all Events", events_path, class: "link-secondary" %></a>
+          </div>
+            <div class="col-md-5 order-md-1">
+              <img src="https://media.istockphoto.com/photos/concert-crowd-picture-id483826404?k=6&m=483826404&s=612x612&w=0&h=7T7wKCLkZmgmSTp13HmK8rzdeGjRrhGjy5IbgdeS_RA=" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" />
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+        <div class="col-md-7">
+        <h2 class="featurette-heading">... and Interact!</h2>
+        <p class="lead">Follow other organizations, leave comments and likes</p>
+        </div>
+        <div class="col-md-5">
+         <div class="col-md-5 order-md-1">
+              <img src="https://get.pxhere.com/photo/aerial-agreement-arms-black-and-white-business-business-deal-bw-caucasian-celebration-closeup-collaboration-colleague-computer-connection-cooperation-digital-device-diverse-european-expression-friends-friendship-grayscale-hands-hands-stacks-help-laptop-meeting-network-notebook-office-partnership-people-power-stack-of-hands-stacked-hands-stacking-hands-startup-success-support-team-team-building-teamwork-together-togetherness-trust-unity-westerner-work-workplace-black-photograph-hand-finger-photography-monochrome-photography-joint-arm-monochrome-nail-muscle-holding-hands-wrist-1456351.jpg" width="500" height="475" />
+            </div>
+
+
+
+
+        </div>
+        </div>
+      <hr class="featurette-divider">
+      <!-- /END THE FEATURETTES -->
+    </div><!-- /.container -->
+  <footer class="container">
+    <p class="float-end"><a href="#">Back to top</a></p>
+    <p>&copy; 2021 PostLintel Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+  </footer>
 </div>

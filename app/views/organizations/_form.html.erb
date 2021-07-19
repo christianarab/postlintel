@@ -1,11 +1,11 @@
  <%= form_for(Organization.new, as: :organization, url: organizations_path, method: :post) do |form| %>
  <div>
-    <br>  <h5>Title:</h5><%= form.text_field :title, :required => true %>
-    <br>  <h5>Description:</h5><%= form.text_field :description, :required => true %>
-    <br>  <h5>Location:</h5><%= form.text_field :location, :required => true %>
-    <br>  <h5>Upload photo:</h5> <%= form.file_field :org_photo, :required => true %>
+    <br>  <h6>Title:</h6><%= form.text_field :title, :required => true %>
+    <br>  <h6>Description:</h6><%= form.text_field :description, :required => true %>
+    <br>  <h6>Location:</h6><%= form.text_field :location, :required => true %>
+    <br>  <h6>Upload photo:</h6> <%= form.file_field :org_photo, :required => true %>
     <br>  <%= form.hidden_field :user_id, :value => current_user.id %>
     <br>
-    <%= form.submit "Edit", :class => 'btn-primary btn' %>
+    <%= form.submit "Submit", :class => 'btn-primary btn' %>
 <% end %>
 </div>

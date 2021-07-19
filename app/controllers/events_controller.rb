@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Organization.find(params[:organization_id]).events.find(params[:id])
+    @event = Event.find(params[:id])
   end
 
   def destroy

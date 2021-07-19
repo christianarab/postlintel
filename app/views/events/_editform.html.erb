@@ -1,4 +1,6 @@
-<%= form_with(model: @event, url: organization_events_path(params[:id])) do |f| %>
+<h6> Edit your organization </h6>
+<%= form_with(model: @event, method: :patch) do |f| %>
+ <div>
     <%= f.label :title, class: "label" %>
     <%= f.text_field :title, class: "input form-control", autofocus: true %>
     <br>  
@@ -19,5 +21,6 @@
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <br>  
     <%= f.submit "Create Event", class: "btn btn-primary" %>
-    <br>  
+    <br> 
 <% end %>
+</div>
