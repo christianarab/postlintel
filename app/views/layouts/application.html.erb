@@ -19,6 +19,7 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
+    <%= react_component("HelloWorld", { greeting: "Hello from react-rails." }) %>
     <%= render "layouts/nav" %>
     <div class="container">
       <%= yield %>
