@@ -21,6 +21,9 @@ _-_ wikipedia
 
 ## Overview
 
+**Preview PL**
+[link](https://postandlintel.herokuapp.com/)
+
 PL (Post and Lintel) is a portal for community leaders - allowing short and long posts, and events. The bridge for community leaders to communicate and share concerns, events, and other viable forms of information - specific to time and place.
 
 Unique to P/L is the the interactivity of users to user generated events with blog systems. Users of P/L are able to create content - without the restrictions and limitations of such platforms as FaceBook and Meetup!
